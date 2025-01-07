@@ -13,12 +13,14 @@ ID=$(date +%s%N)
 
 # Verificar el estado y estructurar la respuesta JSON
 if [ $EXIT_CODE -eq 0 ]; then
-    STATUS=$(echo "$STATUS_OUTPUT" | grep -o '"status": "[^"]*"' | awk -F':' '{print $2}' | tr -d '"')
+    STATUS=$(echo "$STATUS_OUTPUT" | grep -o '"status":"[^"]*"' | awk -F':' '{print $2}' | tr -d '"')
+    echo "$STATUS"
 else
     STATUS="error"
+    echo "$STATUS"
 fi
 
 
 
-echo "$STATUS"
+
 
