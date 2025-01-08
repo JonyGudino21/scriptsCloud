@@ -49,11 +49,10 @@ syrus-apps-manager start "$INSTANCE_NAME" || {
 #    - Verificamos que el archivo de logs exista antes de imprimirlo.
 # -----------------------------------------------------------------------------
 LOG_FILE="/data/logs/${INSTANCE_NAME}-out.log"
-if [ -s "$LOG_FILE" ]; then
-  echo "Leyendo archivo línea por línea:"
-  while IFS= read -r line; do
-    echo "$line"
-  done < "$LOG_FILE"
+if [ -f "$LOG_FILE" ]; then
+  echo "Contenido completo del archivo de logs:"
+  LOG_CONTENT=$(<"$LOG_FILE")
+  echo "$LOG_CONTENT"
 else
   echo "Error: No se encontró el archivo de logs $LOG_FILE"
   exit 1
