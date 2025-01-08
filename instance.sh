@@ -48,6 +48,7 @@ syrus-apps-manager start "$INSTANCE_NAME" || {
 # 3. Mostrar contenido de logs
 #    - Verificamos que el archivo de logs exista antes de imprimirlo.
 # -----------------------------------------------------------------------------
+LOG_FILE="/data/logs/${INSTANCE_NAME}-out.log"
 if [ -f "$LOG_FILE" ]; then
   echo "Monitoreando contenido de logs (presiona Ctrl+C para salir):"
   tail -f "$LOG_FILE"
