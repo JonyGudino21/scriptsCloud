@@ -43,7 +43,7 @@ syrus-apps-manager start "$INSTANCE_NAME" || {
   echo "Error: No se pudo iniciar la instancia $INSTANCE_NAME"
   exit 1
 }
-
+sleep 3
 # -----------------------------------------------------------------------------
 # 3. Mostrar contenido de logs
 #    - Verificamos que el archivo de logs exista antes de imprimirlo.
