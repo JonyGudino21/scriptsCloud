@@ -39,19 +39,25 @@ APP_VERSION="1.0.0"
 # 2. Iniciar la instancia
 #    - Mismo control de error que arriba, en caso de fallar la ejecución.
 # -----------------------------------------------------------------------------
+echo "Iniciando la instancia..."
 syrus-apps-manager start "$INSTANCE_NAME" || {
   echo "Error: No se pudo iniciar la instancia $INSTANCE_NAME"
   exit 1
 }
 
-# -----------------------------------------------------------------------------
-# 3. Mostrar contenido de logs
-#    - Verificamos que el archivo de logs exista antes de imprimirlo.
-# -----------------------------------------------------------------------------
+# Comprobar si el archivo existe y tiene contenido
 LOG_FILE="/data/logs/${INSTANCE_NAME}-out.log"
+echo "Verificando archivo de logs en: $LOG_FILE"
 if [ -f "$LOG_FILE" ]; then
-  echo "Monitoreando contenido de logs (presiona Ctrl+C para salir):"
-  tail -f "$LOG_FILE"
+  echo "Archivo encontrado. Comprobando tamaño..."
+  ls -lh "$LOG_FILE"
+
+  if [ -s "$LOG_FILE" ]; then
+    echo "El archivo tiene contenido. Leyendo:"
+    cat "$LOG_FILE"
+  else
+    echo "El archivo está vacío."
+  fi
 else
   echo "Error: No se encontró el archivo de logs $LOG_FILE"
   exit 1
